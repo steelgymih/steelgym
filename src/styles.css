@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Bebas Neue";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/JTUSjIg69CK48gW7PXoo9Wlhyw.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("/fonts/xn7gYHE41ni1AdIRggexSg.woff2") format("woff2");
+}
+
+@theme {
+  --color-bg: #09090b;
+  --color-surface: #121214;
+  --color-elevated: #1a1a1e;
+  --color-fg: #f4f4f5;
+  --color-muted: #a1a1aa;
+  --color-subtle: #71717a;
+  --color-border: #232326;
+  --color-border-strong: #3f3f46;
+  --color-red: #e10613;
+  --color-amber: #f0a020;
+  --color-steel: #d4d4d8;
+  --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --motion-quick: 150ms;
+  --motion-fast: 250ms;
+  --motion-slow: 400ms;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-fg);
+    min-height: 100vh;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-red) 70%, black);
+    color: white;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+.neon-amber {
+  color: var(--color-amber);
+  text-shadow:
+    0 0 8px color-mix(in oklab, var(--color-amber) 70%, transparent),
+    0 0 24px color-mix(in oklab, var(--color-amber) 40%, transparent);
+}
+
+.neon-white {
+  text-shadow:
+    0 0 10px color-mix(in oklab, white 35%, transparent),
+    0 0 28px color-mix(in oklab, white 12%, transparent);
+}
+
+.hex-overlay {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='64' viewBox='0 0 56 64'><path d='M28 2 L52 16 L52 48 L28 62 L4 48 L4 16 Z' fill='none' stroke='%23e10613' stroke-opacity='0.22' stroke-width='1.2'/></svg>");
+  background-size: 56px 64px;
+}
+
+.led-bar {
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #f4f4f5 18%,
+    #f4f4f5 82%,
+    transparent
+  );
+  box-shadow: 0 0 12px rgba(244, 244, 245, 0.55);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  .neon-amber,
+  .neon-white {
+    text-shadow: none;
+  }
+}
